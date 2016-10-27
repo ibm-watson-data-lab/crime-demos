@@ -1,6 +1,6 @@
 # Overview: crime-demos
 
-Crime demos is an IBM Bluemix app that demonstrates some of the things you can do with the open crime data we publish in a [world-readable Cloudant database](https://opendata.cloudant.com/crimes). There's also a [documented public API](https://opendata.mybluemix.net/static/crimes.html) for accessing the data programmically. 
+Crime demos is collection of apps that demonstrate some of the things you can do with the open crime data we publish in a [world-readable Cloudant database](https://opendata.cloudant.com/crimes). There's also a [documented public API](https://opendata.mybluemix.net/static/crimes.html) for accessing the data programmatically. 
 
 ## How it works
 
