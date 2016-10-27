@@ -1,5 +1,5 @@
 disk_quota: 128M
-host: crimedemos
+random-route: true
 name: crimedemos
 command: node app.js
 path: .
