@@ -1,0 +1,13 @@
+{
+	"name": "crime-demos",
+	"version": "0.2.0",
+	"description": "crime demos using crime open data",
+	"dependencies": {
+		"express": "4.x",
+		"request": "2.48.x"
+	},
+	"scripts": {
+		"start": "node app.js"
+	},
+	"repository": {}
+}

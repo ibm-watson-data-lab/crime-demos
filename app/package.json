@@ -1,0 +1,38 @@
+{
+  "name": "crimeviz",
+  "version": "0.0.2",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint --no-eslintrc -c .eslintrc index.js",
+    "start": "budo cssjs/index.js --serve=cssjs/bundle.js --live -d",
+    "build": "browserify cssjs/index.js | uglifyjs -c -m > cssjs/bundle.js"
+  },
+  "browserify": {
+    "transform": [
+      "envify",
+      "brfs"
+    ]
+  },
+  "keywords": [
+    "demo", "cloudant", "opendata", "crime", "mapbox-gl-js"
+  ],
+  "author": "rajrsingh",
+  "license": "ISC",
+  "devDependencies": {
+    "brfs": "^1.4.3",
+    "browserify": "^12.0.1",
+    "budo": "^7.0.1",
+    "envify": "^3.4.0",
+    "eslint": "^1.10.3",
+    "neat-csv": "^1.1.0",
+    "uglify-js": "^2.6.1"
+  },
+  "dependencies": {
+    "lodash.groupby": "^4.0.1",
+    "lodash.remove": "^4.7.0",
+    "pencil": "tristen/pencil",
+    "rainbow": "qard/rainbow",
+    "turf-simplify": "^1.0.3",
+    "turf-within": "^1.0.1"
+  }
+}

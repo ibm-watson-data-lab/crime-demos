@@ -1,0 +1,14 @@
+[
+  {
+    "code": "CDSSTREET",
+    "description": "Street Crime"
+  },
+  {
+    "code": "CDSNV",
+    "description": "Non-Violent"
+  },
+  {
+    "code": "CDSDV",
+    "description": "Domestic Violence"
+  }
+]
