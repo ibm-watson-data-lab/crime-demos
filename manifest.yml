@@ -1,6 +1,6 @@
 disk_quota: 128M
-host: crimes
-name: crime-demos
+host: crimedemos
+name: crimedemos
 command: node app.js
 path: .
 domain: mybluemix.net
