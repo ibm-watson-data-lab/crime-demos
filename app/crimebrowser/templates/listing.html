@@ -1,0 +1,9 @@
+<div class='pad1 keyline-bottom'>
+  <h4>
+    <%- data.properties.desc %>
+  </h4>
+  <div class='quiet'>
+    <% if (data.properties.crimetype) { %>Code: <span class='badge'><%- data.properties.crimetype %></span> <% } %>
+    <% if (data.properties.time) { %><br/><%- data.properties.time %><% } %>
+  </div>
+</div>

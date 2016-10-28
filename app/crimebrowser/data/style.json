@@ -1,0 +1,12 @@
+[
+  {
+    "id": "crimes",
+    "interactive": true,
+    "type": "symbol",
+    "source": "geojson",
+    "layout": {
+      "icon-image": "music",
+      "icon-allow-overlap": true
+    }
+  }
+]

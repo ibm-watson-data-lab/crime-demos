@@ -2,14 +2,21 @@
 
 Crime demos is collection of apps that demonstrate some of the things you can do with the open crime data we publish in a [world-readable Cloudant database](https://opendata.cloudant.com/crimes). There's also a [documented public API](https://opendata.mybluemix.net/static/crimes.html) for accessing the data programmatically. 
 
+## Available apps
+
+[Crime Browser](./app/crimebrowser/index.html): A simple point data browsing app that uses an adjustable circle as a "window" on crime data
+
+[Crime Visualization](./app/index.html): A more complex app that queries crimes based on a polygon you draw, providing summary statistics for those crimes selected by the polygon. It also allows a user to adjust the query's time of day.
+
+
 ## How it works
 
-The application uses these Bluemix services:
+The applications use this Bluemix service:
 
 * a Node.js runtime
 
 
-## Running the app on Bluemix
+## Running the apps on Bluemix
 
 The fastest way to deploy this application to Bluemix is to click the **Deploy to Bluemix** button below.
 

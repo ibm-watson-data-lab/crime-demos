@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Explore points of interest by radius</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link href="https://www.mapbox.com/base/latest/base.css" rel="stylesheet" />
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.13.1/mapbox-gl.css" rel="stylesheet" />
+  <link href="site.css" rel="stylesheet" />
+</head>
+<body class="clip loading">
+<div id="map" class="map"></div>
+
+<div class="pin-topleft pin-bottomleft z1 col3 listing-container">
+  <div class="fill-white full-height-container">
+    <div id="banner">
+      <h2>Crime Browser</h2>
+      <strong>IBM</strong> Cloud Data Services
+    </div>
+    <div id="listing" class="scroll round-bottom fill-light round-bottom">
+    </div>
+  </div>
+</div>
+
+<div id="legend" class="pin-bottomright z1 pad2y legend">
+  <div class="pad1 fill-lighten3 radius small">
+    Drag the blue circle over points on the map to populate crime events under it. Zooming on the circle increases or decreases its radius.
+  </div>
+</div>
+
+<div class="pin-bottomleft z1 margin3 mb-watermark">
+  <div class="pad1y">
+    <img src="mb.svg" alt="Mapbox logo" />
+  </div>
+</div>
+
+<script src="bundle.js"></script>
+</body>
+</html>
