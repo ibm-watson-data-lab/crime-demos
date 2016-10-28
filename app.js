@@ -20,3 +20,5 @@ var host = (process.env.VCAP_APP_HOST || 'localhost');
 var port = (process.env.VCAP_APP_PORT || 3000);
 // Start server
 app.listen(port, host);
+
+require("cf-deployment-tracker-client").track();

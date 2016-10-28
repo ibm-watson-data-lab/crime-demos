@@ -4,10 +4,14 @@
 	"description": "crime demos using crime open data",
 	"dependencies": {
 		"express": "4.x",
-		"request": "2.48.x"
+		"request": "2.48.x", 
+		"cf-deployment-tracker-client": "*"
 	},
 	"scripts": {
 		"start": "node app.js"
 	},
-	"repository": {}
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ibm-cds-labs/crime-demos.git"
+	}
 }
