@@ -17,31 +17,32 @@
 
 <div class="pin-topleft pad1 sidebar-panel z10 sidebar-container">
   <div class="fill-white round lifted">
-    <div class="pad2">
+    <div>
       <div id="cdshead">
-        <div id="cdslogo" class="fill-navy dark round pad1">IBM<br>Cloud Data<br>Services</div>
-        <div id="citychooser" class="fill-white light round pad1">
-          <form action="/">
-            <select name="city" onchange="this.form.submit()">
-              <option id="boston" value="boston">Boston</option>
-              <option id="vegas" value="vegas" selected>Las Vegas</option>
-              <option id="sf" value="sf">San Francisco</option>
-            </select>
-          </form>
+        <div id="cdslogo" class="fill-navy dark round-top pad1">
+          <div>IBM<br>Cloud Data<br>Services</div>
+
+          <div id="citychooser" class="text-right">
+            <form action="/">
+              <select name="city" onchange="this.form.submit()">
+                <option id="boston" value="boston">Boston</option>
+                <option id="vegas" value="vegas" selected>Las Vegas</option>
+                <option id="sf" value="sf">San Francisco</option>
+              </select>
+            </form>
+          </div>
         </div>
       </div>
 
-      <h3 class="block space-bottom1">Crimes in <span id="citynameintitle"> </span></h3>
-      <div class="prose quiet">
+      <h3 class="block pad1">Crimes in <span id="citynameintitle"> </span></h3>
+      <div class="prose quiet pad1">
         <p>Select the pencil tool and draw a shape on the map to query crimes within it.</p>
       </div>
     </div>
 
-    <div class="pad2" style="margin:0 44px 0 44px">
-      <div id="draw-controls" class="fill-navy text-right dark round draw-controls"></div>
-    </div>
+    <div id="draw-controls" class="fill-navy text-right dark round draw-controls"></div>
 
-    <div id="aggregates" class="fill-navy-dark round-bottom pad2 small dark"></div>
+    <div id="aggregates" class="fill-navy-dark pad2 small dark"></div>
     <div id="sliderspace" class="fill-navy-dark round-bottom small dark">
       <div id="slidertitle"><strong>Time of day</strong></div>
       <div id="timeslider"></div>
