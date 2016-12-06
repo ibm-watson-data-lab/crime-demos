@@ -14,7 +14,11 @@
     ]
   },
   "keywords": [
-    "demo", "cloudant", "opendata", "crime", "mapbox-gl-js"
+    "demo",
+    "cloudant",
+    "opendata",
+    "crime",
+    "mapbox-gl-js"
   ],
   "author": "rajrsingh",
   "license": "ISC",
@@ -28,6 +32,7 @@
     "uglify-js": "^2.6.1"
   },
   "dependencies": {
+    "browser-request": "^0.3.3",
     "lodash.groupby": "^4.0.1",
     "lodash.remove": "^4.7.0",
     "pencil": "tristen/pencil",

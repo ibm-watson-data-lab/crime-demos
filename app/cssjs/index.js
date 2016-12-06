@@ -7,8 +7,10 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicmFqcnNpbmdoIiwiYSI6ImpzeDhXbk0ifQ.VeSXCxcobmgfLgJAnsK3nw';//process.env.MapboxAccessToken;
 
 // Node modules that browserify supports
-var fs = require('fs');
-var path = require('path');
+// var fs = require('fs');
+// var path = require('path');
+// var urljoin = require('url-join');
+var request = require('browser-request');
 
 var turfSimplify = require('turf-simplify');
 var turfWithin = require('turf-within');
@@ -44,7 +46,7 @@ var slider = document.getElementById('timeslider');
   slider.noUiSlider.on('update', function(){
     MIN_TIME = slider.noUiSlider.get()[0];
     MAX_TIME = slider.noUiSlider.get()[1];
-    console.log('min: '+MIN_TIME+'   max: '+MAX_TIME);
+    // console.log('min: '+MIN_TIME+'   max: '+MAX_TIME);
     if (SELECTION_FEATURE) {
       redraw(SELECTION_FEATURE);
     }
@@ -52,30 +54,37 @@ var slider = document.getElementById('timeslider');
   // end slider stuff
 
 // set the city
-var CITIES = ['vegas','boston'];
+var CITIES = ['vegas','boston', 'sf', 'chicago','test'];
+var CITIES_NICE_NAME = ['Las Vegas','Boston', 'San Francisco', 'Chicago','Test'];
 var CITY_BOUNDS = [
-  [-115.403,35.883,-114.790,36.356],
-  [-71.192,42.228,-70.985,42.396]
+  [-115.2,35.883,-114.790,36.356],
+  [-71.192,42.228,-70.985,42.396],
+  [-122.525,37.70,-122.348,37.816],
+  [-87.876,41.774,-87.587,41.953],
+  [-71.073,42.353,-70.973,42.453]
 ];
 var CITY_CENTERS = [
   [-115.1427,36.1637],
+  [-71.073,42.353],
+  [-122.421,37.781],
+  [-87.637,41.897],
   [-71.073,42.353]
 ];
-// var CITY = 'vegas';
+var CITY = 'vegas';
 var city_index = 0;
-// var qc = getQueryVariable("city");
-// if (qc && CITIES.indexOf(qc)) {
-//   city_index = CITIES.indexOf(qc);
-//   CITY = qc;
-// }
+var qc = getQueryVariable("city");
+if (qc && CITIES.indexOf(qc)) {
+  city_index = CITIES.indexOf(qc);
+  CITY = qc;
+  document.getElementById(CITIES[city_index]).selected = true;
+}
 // console.log("city index: "+city_index);
 // console.log("city name: "+CITIES[city_index]);
 
 // Data
 // var fn = (CITIES[city_index]+'_crimes.geojson').toString();
-var crimes = JSON.parse(fs.readFileSync(path.join(__dirname, '../data', 'vegas_crimes.geojson')), 'utf8');
-// var codes = JSON.parse(fs.readFileSync(path.join(__dirname, '/data/cdscodes.json'), 'utf8'));
-// var conditions = JSON.parse(fs.readFileSync(path.join(__dirname, '/data/conditions.json'), 'utf8'));
+// var crimes = JSON.parse(fs.readFileSync(urljoin(__dirname, '../data/', fn)), 'utf8');
+var crimes = {};//JSON.parse(fs.readFileSync(urljoin(__dirname, '../data/', 'vegas_crimes.geojson')), 'utf8');
 
 var map = new mapboxgl.Map({
   container: 'map',
@@ -95,7 +104,6 @@ var popup = new mapboxgl.Popup({
 var legend = document.getElementById('legend');
 var aggregateContainer = document.getElementById('aggregates');
 var defaultText = document.createElement('strong');
-  defaultText.textContent = crimes.features.length.toLocaleString() + ' total crimes';
 
 aggregateContainer.appendChild(defaultText);
 
@@ -115,6 +123,9 @@ var layers = [
 
 function initialize() {
   document.body.classList.remove('loading');
+
+  document.getElementById('citynameintitle').textContent = CITIES_NICE_NAME[city_index];
+  defaultText.textContent = crimes.features.length.toLocaleString() + ' total crimes';
 
   map.addSource('crimes', {
     type: 'geojson',
@@ -271,19 +282,6 @@ function redraw(feature) {
         if (d.properties.desc) return d.properties.desc;
         return "UNKNOWN";
       })
-    // }, {
-    //   label: 'Species',
-    //   aggregate: groupBy(within.features, function(d) {
-    //     var species = d.properties.species;
-    //     if (!species || species === '0') {
-    //       species = 'UNKNOWN';
-    //     } else {
-    //       codes.forEach(function(code) {
-    //         species = species === code.code ? code.name : species;
-    //       });
-    //     }
-    //     return species;
-    //   })
     }];
 
     var index = 0;
@@ -298,23 +296,30 @@ function redraw(feature) {
 
       var propindex = 0;
       for (var prop in d.aggregate) {
-        var bar = document.createElement('div');
-        bar.className = 'fl bar fill-blue pad0y';
+        try {
+          var bar = document.createElement('div');
+          bar.className = 'fl bar fill-blue pad0y';
 
-        var percentage = (d.aggregate[prop].length / within.features.length) * 100;
-        percentage = percentage < 1 ? percentage.toFixed(1) : Math.floor(percentage);
+          var percentage = (d.aggregate[prop].length / within.features.length) * 100;
+          percentage = percentage < 1 ? percentage.toFixed(1) : Math.floor(percentage);
 
-        bar.style.width = percentage + '%';
-        if (index==0) bar.style.backgroundColor = layers[propindex][1];
-        else bar.style.backgroundColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-        
-        
-        var tooltip = prop + ' (' + percentage + '%)';
-        bar.setAttribute('data-tooltip', tooltip.toLowerCase());
-        barContainer.appendChild(bar);
-        propindex++;
+          bar.style.width = percentage + '%';
+          if (index==0 && propindex<=layers.length) bar.style.backgroundColor = layers[propindex][1];
+          else bar.style.backgroundColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+          
+          
+          var tooltip = prop + ' (' + percentage + '%)';
+          bar.setAttribute('data-tooltip', tooltip.toLowerCase());
+          barContainer.appendChild(bar);
+        } catch(e) {
+          console.log(e.stack);
+          console.log("PROP: "+prop);
+          console.log("d.aggregate[prop]: "+d.aggregate[prop]);
+        } finally {
+          propindex++;
+        }
       }
-        index++;
+      index++;
 
       aggregateContainer.appendChild(barContainer);
       aggregateContainer.appendChild(label);
@@ -461,4 +466,16 @@ function getQueryVariable(variable) {
   return (false);
 }
 
-map.on('load', initialize);
+function getCrimeData() {
+  var dataurl = 'http://opendata.mybluemix.net/crimes?bbox=' + CITY_BOUNDS[city_index].toString();
+  // dataurl = '/data/boston_crimes.geojson';
+  request.get({url:dataurl, json:true}, function(er, resp, result) {
+    if(er)
+      throw er;
+
+    crimes = resp.body;
+    initialize();
+  });
+}
+
+map.on('load', getCrimeData);
