@@ -56,6 +56,7 @@ var slider = document.getElementById('timeslider');
 // set the city
 var CITIES = ['vegas','boston', 'sf', 'chicago','test'];
 var CITIES_NICE_NAME = ['Las Vegas','Boston', 'San Francisco', 'Chicago','Test'];
+var CITY_DAYS_OF_DATA = [14, 14, 28, 28, 7];
 var CITY_BOUNDS = [
   [-115.2,35.883,-114.790,36.356],
   [-71.192,42.228,-70.985,42.396],
@@ -470,14 +471,23 @@ function getCrimeData() {
   if (!el === undefined && el != null) el.selected = true;
   var dataurl = 'http://opendata.mybluemix.net/crimes?bbox=' + CITY_BOUNDS[city_index].toString();
   var d = new Date();
-  d.setDate(d.getDate() - 14);
+  
+  d.setDate(d.getDate() - CITY_DAYS_OF_DATA[city_index]);
   dataurl += '&time=' + d.valueOf();
   // dataurl = '/data/boston_crimes.geojson';
+  console.log("Getting data: "+dataurl);
   request.get({url:dataurl, json:true}, function(er, resp, result) {
     if(er)
       throw er;
 
     crimes = resp.body;
+    if (crimes.features.length < 100) {
+      if (crimes.features.length < 1) {
+        alert('No crimes found! Either this area is amazingly safe or an error has occurred.');
+      } else {
+        alert('Only '+crimes.features.length + ' crimes found');
+      }
+    }
     initialize();
   });
 }
