@@ -76,7 +76,6 @@ var qc = getQueryVariable("city");
 if (qc && CITIES.indexOf(qc)) {
   city_index = CITIES.indexOf(qc);
   CITY = qc;
-  document.getElementById(CITIES[city_index]).selected = true;
 }
 // console.log("city index: "+city_index);
 // console.log("city name: "+CITIES[city_index]);
@@ -314,7 +313,7 @@ function redraw(feature) {
         } catch(e) {
           console.log(e.stack);
           console.log("PROP: "+prop);
-          console.log("d.aggregate[prop]: "+d.aggregate[prop]);
+          // console.log("d.aggregate[prop]: "+d.aggregate[prop]);
         } finally {
           propindex++;
         }
@@ -467,7 +466,12 @@ function getQueryVariable(variable) {
 }
 
 function getCrimeData() {
+  var el = document.getElementById('city_'+CITIES[city_index]);
+  if (!el === undefined && el != null) el.selected = true;
   var dataurl = 'http://opendata.mybluemix.net/crimes?bbox=' + CITY_BOUNDS[city_index].toString();
+  var d = new Date();
+  d.setDate(d.getDate() - 14);
+  dataurl += '&time=' + d.valueOf();
   // dataurl = '/data/boston_crimes.geojson';
   request.get({url:dataurl, json:true}, function(er, resp, result) {
     if(er)

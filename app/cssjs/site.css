@@ -1,3 +1,8 @@
+select {
+  font-weight: 700 !important;
+  font-size: 10.5pt;
+  width: 50%;
+}
 #cdslogo {
   font-weight: 900;
   font-size: 9pt;
@@ -8,7 +13,8 @@
 }
 
 #draw-controls {
-  margin: 0 64px 8px 64px;
+  float: right;
+  margin: 0 4px 0px 4px;
 }
 
 #sliderspace {

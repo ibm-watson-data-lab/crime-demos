@@ -1,6 +1,6 @@
 {
   "name": "crimeviz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "scripts": {
     "test": "eslint --no-eslintrc -c .eslintrc index.js",

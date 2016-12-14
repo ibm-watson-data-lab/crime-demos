@@ -19,33 +19,35 @@
   <div class="fill-white round lifted">
     <div>
       <div id="cdshead">
-        <div id="cdslogo" class="fill-navy dark round-top pad1">
-          <div>IBM<br>Cloud Data<br>Services</div>
-
-          <div id="citychooser" class="text-right">
-            <form action="/">
-              <select name="city" onchange="this.form.submit()">
-                <option id="boston" value="boston">Boston</option>
-                <option id="vegas" value="vegas" selected>Las Vegas</option>
-                <option id="sf" value="sf">San Francisco</option>
-              </select>
-            </form>
-          </div>
+        <div id="cdslogo" class="fill-denim dark round-top pad1">
+          <div id="draw-controls" class="fill-denim dark round draw-controls text-right"></div>
+          <div>IBM<br>Watson<br>Data</div>
         </div>
       </div>
 
-      <h3 class="block pad1">Crimes in <span id="citynameintitle"> </span></h3>
-      <div class="prose quiet pad1">
-        <p>Select the pencil tool and draw a shape on the map to query crimes within it.</p>
+      <div id="citychooser">
+        <!--<form action="/">-->
+          <h3 class="block pad1">Crimes in 
+            <span id="citynameintitle">...</span>
+                <!--
+                <select name="city" onchange="this.form.submit()">
+                  <option id="city_boston" value="boston">Boston</option>
+                  <option id="city_vegas" value="vegas">Las Vegas</option>
+                  <option id="city_sf" value="sf">San Francisco</option>
+                </select-->
+          </h3>
+        <!--</form>-->
       </div>
-    </div>
+      <div class="prose quiet pad1">
+        <p>Select the pencil tool above and draw a shape on the map to query crimes within it.</p>
+      </div>
+    
 
-    <div id="draw-controls" class="fill-navy text-right dark round draw-controls"></div>
-
-    <div id="aggregates" class="fill-navy-dark pad2 small dark"></div>
-    <div id="sliderspace" class="fill-navy-dark round-bottom small dark">
+    <div id="aggregates" class="fill-navy dark pad2 small dark"></div>
+    <div id="sliderspace" class="fill-navy dark round-bottom small dark">
       <div id="slidertitle"><strong>Time of day</strong></div>
       <div id="timeslider"></div>
+    </div>
     </div>
   </div>
 </div>
