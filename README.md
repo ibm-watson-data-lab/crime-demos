@@ -61,4 +61,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+_These applications are for demonstration purposes only and are in no way offering advice for safety purposes._
+
 
