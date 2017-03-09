@@ -1,3 +1,43 @@
+#controlpanel {
+  padding-top: 48px;
+}
+#citymenu {
+  width: 100%;
+}
+
+.nav ul {
+  list-style: none;
+  /*text-align: center;*/
+  padding: 0;
+  margin: 0;
+}
+.nav li {
+  /*font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;*/
+  line-height: 40px;
+  height: 40px;
+  /*border-bottom: 1px solid #888;*/
+  display: inline-block;
+  padding: 0 8px;
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #005f5f;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444444;
+  cursor: default;
+}
+
 select {
   font-weight: 700 !important;
   font-size: 10.5pt;
