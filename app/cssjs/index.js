@@ -54,21 +54,23 @@ var slider = document.getElementById('timeslider');
   // end slider stuff
 
 // set the city
-var CITIES = ['vegas','boston', 'sf', 'chicago','test'];
-var CITIES_NICE_NAME = ['Las Vegas','Boston', 'San Francisco', 'Chicago','Test'];
-var CITY_DAYS_OF_DATA = [14, 14, 28, 28, 7];
-var CITY_BOUNDS = [
+const CITIES = ['vegas','boston', 'sf', 'chicago','philly','test'];
+const CITIES_NICE_NAME = ['Las Vegas','Boston', 'San Francisco', 'Chicago','Philadelphia','Test'];
+const CITY_DAYS_OF_DATA = [14, 14, 28, 28, 14, 7];
+const CITY_BOUNDS = [
   [-115.2,35.883,-114.790,36.356],
   [-71.192,42.228,-70.985,42.396],
   [-122.525,37.70,-122.348,37.816],
   [-87.876,41.774,-87.587,41.953],
+  [-75.294,39.872,-75.000,40.147],
   [-71.073,42.353,-70.973,42.453]
 ];
-var CITY_CENTERS = [
+const CITY_CENTERS = [
   [-115.1427,36.1637],
   [-71.073,42.353],
   [-122.421,37.781],
   [-87.637,41.897],
+  [-75.167,39.95],
   [-71.073,42.353]
 ];
 var CITY = 'vegas';
@@ -78,8 +80,8 @@ if (qc && CITIES.indexOf(qc)) {
   city_index = CITIES.indexOf(qc);
   CITY = qc;
 }
-// console.log("city index: "+city_index);
-// console.log("city name: "+CITIES[city_index]);
+console.log("city index: "+city_index);
+console.log("city name: "+CITIES[city_index]);
 
 // Data
 // var fn = (CITIES[city_index]+'_crimes.geojson').toString();
@@ -90,9 +92,8 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v8',
   center: CITY_CENTERS[city_index],
-  // maxBounds: CITY_BOUNDS[city_index], 
-  zoom: 12.75,
-  minZoom: 12
+  // maxBounds: [ [CITY_BOUNDS[city_index][0],CITY_BOUNDS[city_index][1]], [CITY_BOUNDS[city_index][2],CITY_BOUNDS[city_index][3]] ], 
+  zoom: 11
 });
 
 if (window.location.search.indexOf('embed') !== -1) map.scrollZoom.disable();
@@ -467,13 +468,13 @@ function getQueryVariable(variable) {
 }
 
 function getCrimeData() {
-  var el = document.getElementById('city_'+CITIES[city_index]);
-  if (!el === undefined && el != null) el.selected = true;
-  var dataurl = 'http://opendata.mybluemix.net/crimes?bbox=' + CITY_BOUNDS[city_index].toString();
+  var dataurl = 'https://opendata.mybluemix.net/crimes?bbox=' + CITY_BOUNDS[city_index].toString();
   var d = new Date();
   
-  d.setDate(d.getDate() - CITY_DAYS_OF_DATA[city_index]);
-  dataurl += '&time=' + d.valueOf();
+  // d.setDate(d.getDate() - CITY_DAYS_OF_DATA[city_index]);
+  // dataurl += '&time=' + d.valueOf();
+  // set a fixed time since data is no longer updating
+  dataurl += '&time=1487797097884';
   // dataurl = '/data/boston_crimes.geojson';
   console.log("Getting data: "+dataurl);
   request.get({url:dataurl, json:true}, function(er, resp, result) {
