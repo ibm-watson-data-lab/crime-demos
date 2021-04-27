@@ -11,11 +11,24 @@
   <link href="cssjs/site.css" rel="stylesheet" />
 </head>
 <body class="unlimiter loading clip">
-
 <canvas id="canvas" class="contain z1 hidden"></canvas>
+
+  <!-- city menu -->
+<header>
+  <div id="citymenu" class="nav pin-topleft z10">
+    <ul id="cityops" class="fill-navy dark small">
+      <li id="cityoptboston" class="cityopt"><a href="/?city=boston">Boston</a></li>
+      <li id="cityoptchicago" class="cityopt"><a href="/?city=chicago">Chicago</a></li>
+      <li id="cityoptvegas" class="cityopt"><a href="/?city=vegas">Las Vegas</a></li>
+      <li id="cityoptphilly" class="cityopt"><a href="/?city=philly">Philadelphia</a></li>
+      <li id="cityoptsf" class="cityopt"><a href="/?city=sf">San Francisco</a></li>
+    </ul>
+  </div>
+</header>
+
 <div id="map" class="map"></div>
 
-<div class="pin-topleft pad1 sidebar-panel z10 sidebar-container">
+<div id="controlpanel" class="pin-topleft pad1 sidebar-panel z9 sidebar-container">
   <div class="fill-white round lifted">
     <div>
       <div id="cdshead">
